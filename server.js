@@ -11,8 +11,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Initialize SQLite database
-const db = new Database(path.join(__dirname, 'blog.db'));
+// Initialize SQLite database (allow override via env for PaaS persistent storage)
+const dbFilePath = process.env.BLOG_DB_PATH || path.join(__dirname, 'blog.db');
+const db = new Database(dbFilePath);
 db.pragma('journal_mode = WAL');
 
 // Create table if not exists
