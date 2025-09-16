@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Sederhana</title>
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Blog Sederhana</h1>
+    </header>
+
+    <main>
+        <section class="form-section">
+            <h2>Buat / Edit Post</h2>
+            <form id="post-form">
+                <input type="hidden" id="post-id" />
+                <label>
+                    Judul
+                    <input id="title" type="text" placeholder="Judul" required />
+                </label>
+                <label>
+                    Deskripsi
+                    <textarea id="description" placeholder="Deskripsi" required></textarea>
+                </label>
+                <div class="actions">
+                    <button type="submit">Simpan</button>
+                    <button type="button" id="cancel-edit" class="secondary" hidden>Batalkan</button>
+                </div>
+            </form>
+        </section>
+
+        <section>
+            <h2>Daftar Post</h2>
+            <div id="posts" class="posts"></div>
+        </section>
+    </main>
+
+    <footer>
+        <small>Contoh CRUD: HTML + CSS + JS + SQLite</small>
+    </footer>
+
+    <script src="/app.js"></script>
+    <script>
+        // Progressive enhancement: If API unreachable, show a message
+        window.addEventListener('error', () => {
+            const el = document.getElementById('posts');
+            if (el && el.children.length === 0) {
+                el.innerHTML = '<p>Tidak dapat memuat data. Pastikan server berjalan.</p>';
+            }
+        }, { once: true });
+    </script>
+
+</body>
+
+</html>
